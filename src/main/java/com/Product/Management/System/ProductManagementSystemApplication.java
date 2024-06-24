@@ -1,0 +1,15 @@
+package com.Product.Management.System;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class ProductManagementSystemApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(ProductManagementSystemApplication.class, args);
+		
+		System.out.println("All ready to make mom dad proud");
+	}
+
+}
