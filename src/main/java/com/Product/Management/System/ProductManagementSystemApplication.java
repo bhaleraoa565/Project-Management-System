@@ -9,7 +9,7 @@ public class ProductManagementSystemApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(ProductManagementSystemApplication.class, args);
 		
-		System.out.println("All ready to make mom dad proud");
+		System.out.println("All errors resolved...");
 	}
 
 }

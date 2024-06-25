@@ -31,7 +31,7 @@ public class CartItemController {
 	        return cartItemService.addCartItem(cartItem);
 	    }
 	    
-	    @DeleteMapping("/{id}")
+	    @DeleteMapping("cart-item/{id}")
 	    public ResponseEntity<Void> deleteCartItem(@PathVariable Long id) {
 	        Optional<CartModel> cartItem = cartItemService.getCartItemById(id);
 	        if (cartItem.isPresent()) {
