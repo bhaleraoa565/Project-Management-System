@@ -1,6 +1,8 @@
 package com.Product.Management.System.Service;
 
 
+import java.util.Collections;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -21,15 +23,23 @@ public class UserService implements UserDetailsService {
 	public UserModel registerUser(UserModel userM) {
 		return userRepo.save(userM);
 	}
+	
+	public UserModel findByUsername(String username) {
+        return userRepo.findByUsername(username);
+    }
 
-	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		UserModel user = userRepo.findByUsername(username)
-				.orElseThrow(()-> new UsernameNotFoundException("User not found"));
-		
-		UserBuilder userBuilder = org.springframework.security.core.userdetails.User.withUsername(username);
-        userBuilder.password(user.getPassword());
-        userBuilder.roles("USER");
-		return userBuilder.build();
-	}
+	
+	public boolean checkCredentials(String username, String password) {
+        UserModel user = userRepo.findByUsername(username);
+        return user != null && user.getPassword().equals(password);
+    }
+
+@Override
+public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+	 UserModel user = userRepo.findByUsername(username);
+     if (user == null) {
+         throw new UsernameNotFoundException("User not found");
+     }
+     return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), Collections.emptyList());
+}
 }
